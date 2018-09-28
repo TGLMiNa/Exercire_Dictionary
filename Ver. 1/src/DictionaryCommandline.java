@@ -46,11 +46,10 @@ public class DictionaryCommandline {
 				showAllWords();
 				break;
 			case 3:
-				System.out.println("\tDo you want to exit? (Y/N) ");
-				if (input.readLine() == "Y")
-					continue;
-				else
+				System.out.print("\tDo you want to exit? (Y/N) : ");
+				if (!input.readLine().equals("Y"))
 					number = 0;
+				break;
 			default:
 				System.out.println("\t***Your option not found, please select again ;");
 				continue;
