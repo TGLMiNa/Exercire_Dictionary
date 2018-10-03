@@ -1,0 +1,67 @@
+﻿
+hello	xin chao	
+hi	chao
+add	them
+column	cot
+wick	den 
+very	rat
+beautiful	dep, tot dep
+beautician	nguoi chu tham mi vien
+japan	nhat ban
+addition	phep cong
+zero	so khong
+admissible	co the chap nhan
+the	cai, con, nguoi
+men	dan ong, nam nhi
+human	con nguoi
+boy	con trai
+girl	con gai
+she	ba ay, chi ay
+my	cua toi
+i	toi, tao
+central	o giua trung tam
+bank	ngan hang
+big	to lon
+small	nho, be
+dog	con cho
+cat	con meo
+monkey	con khi
+disable	vo hieu hoa
+enable	cho phep
+refresh	lam tuoi
+reset	dat lai
+graphic	do hoa
+matrix	ma tran, luoi
+modern	hien dai
+relation	moi quan he
+alignment	can chinh
+alternation	luan phien
+amalgamated	hop nhat
+among	trong so
+amount	so luong
+ample	doi dao
+electronic	dien tu
+amplify	mo rong
+physical	vat ly
+pneumatic	khi
+membrane	mang
+analysable	co the phan tich
+analyser	phan tich
+circuit	chu vi
+curve	duong cong , duong vong  
+differential	khac nhau, phan biet, chenh lech 
+digital	ky thuat so
+direct	thang than
+motion	su van dong, su chuyen dong
+network	mang luoi
+transient	tam thoi, ngan ngui
+analysisgi	su phan tich
+activity	hoat dong
+atomic	nguy tu
+atomicity	hoa tri
+attach	dinh kem
+attain	dat duoc
+attainable	co the dat duoc
+attenuation	su duy giam
+attraction	(vat ly) su hut
+capillary	mao dan

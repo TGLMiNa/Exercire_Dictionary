@@ -1,0 +1,66 @@
+activity: hoat dong
+add: them
+addition: phep cong
+admissible: co the chap nhan
+alignment: can chinh
+alternation: luan phien
+amalgamated: hop nhat
+among: trong so
+amount: so luong
+ample: doi dao
+amplify: mo rong
+analysable: co the phan tich
+analyser: phan tich
+analysisgi: su phan tich
+atomic: nguy tu
+atomicity: hoa tri
+attach: dinh kem
+attain: dat duoc
+attainable: co the dat duoc
+attenuation: su duy giam
+attraction: (vat ly) su hut
+bank: ngan hang
+beautician: nguoi chu tham mi vien
+beautiful: dep, tot dep
+big: to lon
+boy: con trai
+capillary: mao dan
+cat: con meo
+central: o giua trung tam
+circuit: chu vi
+column: cot
+curve: duong cong , duong vong  
+differential: khac nhau, phan biet, chenh lech 
+digital: ky thuat so
+direct: thang than
+disable: vo hieu hoa
+dog: con cho
+electronic: dien tu
+enable: cho phep
+girl: con gai
+graphic: do hoa
+hello: xin chao
+hi: chao
+human: con nguoi
+i: toi, tao
+japan: nhat ban
+matrix: ma tran, luoi
+membrane: mang
+men: dan ong, nam nhi
+modern: hien dai
+monkey: con khi
+motion: su van dong, su chuyen dong
+my: cua toi
+network: mang luoi
+physical: vat ly
+pneumatic: khi
+refresh: lam tuoi
+relation: moi quan he
+reset: dat lai
+she: ba ay, chi ay
+small: nho, be
+the: cai, con, nguoi
+transient: tam thoi, ngan ngui
+very: rat
+wick: den 
+zero: so khong
