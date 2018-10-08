@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="188.0" prefWidth="536.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="example.Delete">
+   <children>
+      <TextArea fx:id="textTarget" layoutX="31.0" layoutY="35.0" prefHeight="108.0" prefWidth="356.0" />
+      <Label layoutX="31.0" layoutY="14.0" prefHeight="21.0" prefWidth="163.0" text="Enter word to delete:">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+      </Label>
+      <Button layoutX="435.0" layoutY="58.0" mnemonicParsing="false" onAction="#deleteWord" prefHeight="31.0" prefWidth="69.0" text="Save" />
+      <Button fx:id="exit" layoutX="435.0" layoutY="104.0" mnemonicParsing="false" onAction="#closeWindow" prefHeight="31.0" prefWidth="69.0" text="Exit" />
+   </children>
+</AnchorPane>
