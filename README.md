@@ -1,1 +1,4 @@
-# Exercire_Dictionary
+# Kodiak_Dictionary
+
+Developers : Lê Quang Vũ
+             Đỗ Đình Trường
