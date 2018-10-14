@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="358.0" prefWidth="407.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Label layoutX="121.0" layoutY="30.0" prefHeight="51.0" prefWidth="237.0" text="Kodiak Dictionary v1.0">
+         <font>
+            <Font name="HelveticaNeue-Bold" size="20.0" />
+         </font>
+      </Label>
+      <ImageView fitHeight="70.0" fitWidth="77.0" layoutX="20.0" layoutY="20.0" pickOnBounds="true" preserveRatio="true" />
+      <Label layoutX="69.0" layoutY="141.0" prefHeight="30.0" prefWidth="105.0" text="Pulish Date : ">
+         <font>
+            <Font name="HelveticaNeue-Bold" size="15.0" />
+         </font>
+      </Label>
+      <Label layoutX="69.0" layoutY="194.0" prefHeight="30.0" prefWidth="105.0" text="Developers : ">
+         <font>
+            <Font name="HelveticaNeue-Bold" size="15.0" />
+         </font>
+      </Label>
+      <Label layoutX="204.0" layoutY="137.0" prefHeight="37.0" prefWidth="150.0" text="20/10/2018">
+         <font>
+            <Font name="HelveticaNeue" size="17.0" />
+         </font>
+      </Label>
+      <Label layoutX="204.0" layoutY="190.0" prefHeight="37.0" prefWidth="150.0" text="Đỗ Đình Trường ">
+         <font>
+            <Font name="HelveticaNeue" size="17.0" />
+         </font>
+      </Label>
+      <Label layoutX="204.0" layoutY="215.0" prefHeight="37.0" prefWidth="150.0" text="Lê Quang Vũ">
+         <font>
+            <Font name="HelveticaNeue" size="17.0" />
+         </font>
+      </Label>
+      <Label layoutX="69.0" layoutY="263.0" prefHeight="30.0" prefWidth="105.0" text="Contact us :">
+         <font>
+            <Font name="HelveticaNeue-Bold" size="15.0" />
+         </font>
+      </Label>
+      <Label layoutX="196.0" layoutY="260.0" prefHeight="37.0" prefWidth="182.0" text="17021090@vnu.edu.vn">
+         <font>
+            <Font name="HelveticaNeue" size="17.0" />
+         </font>
+      </Label>
+      <Label layoutX="196.0" layoutY="286.0" prefHeight="37.0" prefWidth="182.0" text="17021000@vnu.edu.vn">
+         <font>
+            <Font name="HelveticaNeue" size="17.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

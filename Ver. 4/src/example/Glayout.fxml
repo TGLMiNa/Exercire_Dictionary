@@ -10,11 +10,12 @@
    <children>
       <TextArea fx:id="textTarget" layoutX="21.0" layoutY="35.0" prefHeight="144.0" prefWidth="562.0" wrapText="true" />
       <Button layoutX="34.0" layoutY="185.0" mnemonicParsing="false" onAction="#translateWithGoogle" text="Translate" />
-      <Label layoutX="34.0" layoutY="14.0" prefHeight="21.0" prefWidth="158.0" text="Enter English text:">
+      <Label layoutX="34.0" layoutY="14.0" prefHeight="21.0" prefWidth="158.0" text="Enter text:">
          <font>
             <Font name="HelveticaNeue-Bold" size="15.0" />
          </font>
       </Label>
       <TextArea fx:id="textExplain" editable="false" layoutX="21.0" layoutY="226.0" prefHeight="159.0" prefWidth="562.0" wrapText="true" />
+      <Button layoutX="127.0" layoutY="185.0" mnemonicParsing="false" onAction="#speakText" prefHeight="31.0" prefWidth="73.0" text="Speak" />
    </children>
 </AnchorPane>

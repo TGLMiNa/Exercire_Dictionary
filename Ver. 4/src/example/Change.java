@@ -12,6 +12,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.image.Image;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 public class Change {
@@ -65,6 +66,10 @@ public class Change {
 		primaryStage.initModality(Modality.APPLICATION_MODAL);
 		Parent root = FXMLLoader.load(getClass().getResource("changeLayout.fxml"));
 		primaryStage.setScene(new Scene(root));
+		Image image = new Image(getClass().getResourceAsStream("/icons8_About_48px.png"));
+		primaryStage.getIcons().add(image);
+		primaryStage.setTitle("Change Word");
+		primaryStage.setResizable(false);
 		primaryStage.showAndWait();
 	}
 	

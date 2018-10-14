@@ -1,7 +1,7 @@
 package example;
 import java.io.BufferedReader;
+import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import application.TST;
@@ -31,25 +31,25 @@ public class DictionaryManagement {
 	public void insertFromFile() throws IOException {
 		trie = null;
 		trie =  new TST<>();
-		InputStream res = DictionaryManagement.class.getResourceAsStream("/dictionaries.txt");
-		BufferedReader reader = new BufferedReader(new InputStreamReader(res, "UTF-8"));
+		BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream("resources/dictionaries.txt"), "UTF-8"));
 		String Line = reader.readLine();
 		while ((Line = reader.readLine()) != null) {
 			String[] word = Line.split("##");
 			trie.put(word[0], word[1]);
 		}
+		reader.close();
 	}
 
 	public void insertFromFileVA() throws IOException {
 		trie = null;
 		trie =  new TST<>();
-		InputStream res = DictionaryManagement.class.getResourceAsStream("/VA.txt");
-		BufferedReader reader = new BufferedReader(new InputStreamReader(res, "UTF-8"));
+		BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream("resources/VA.txt"), "UTF-8"));
 		String Line = reader.readLine();
 		while ((Line = reader.readLine()) != null) {
-			String[] word = Line.split(":");
+			String[] word = Line.split("##");
 			trie.put(word[0], word[1]);
 		}
+		reader.close();
 	}
 	
 	private void addDict(String EWord, String VWord) {
@@ -86,7 +86,7 @@ public class DictionaryManagement {
 	}
 
 	public void deleteWord(String Word){
-		trie.put(Word, "");
+		trie.put(Word, null);
 	}
 
 	public Iterable<String> searchWord(String word)  {
@@ -99,6 +99,5 @@ public class DictionaryManagement {
 			writer.println(s + ": " + trie.get(s));
 		}
 		writer.close();
-		System.out.println("Done");
 	}
 }

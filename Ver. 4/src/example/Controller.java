@@ -1,9 +1,13 @@
 package example;
 
+import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Optional;
@@ -22,6 +26,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
@@ -31,8 +36,15 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontPosture;
+import javafx.scene.text.FontWeight;
+import javafx.scene.text.Text;
+import javafx.scene.text.TextFlow;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 public class Controller extends Application implements Initializable {
 	private static DictionaryManagement DictManage = new DictionaryManagement();
@@ -44,67 +56,30 @@ public class Controller extends Application implements Initializable {
 	private TextArea textArea;
 
 	@FXML
+	private TextFlow textFlow;
+
+	private Text text = new Text();
+
+	private Hyperlink link = new Hyperlink("Google Translate !!!");
+	@FXML
 	private Label nameWord;
 
 	@FXML
-	private Button speakUKbtn;
-	
-	@FXML
-	private Button speakUSbtn;
-	
-	@FXML
-	private ImageView speakUSLB;
+	private Button speakUKbtn, speakUSbtn;
 
 	@FXML
-	private Label textUSLB;
+	private ImageView speakUSLB, speakUKLB, changeImg = new ImageView(), addImg = new ImageView(),
+			deleteImg = new ImageView(), GtranslateImg = new ImageView(), minimizeWindow = new ImageView(),
+			maximizeWindow = new ImageView(), closeWindow = new ImageView();
 
 	@FXML
-	private ImageView speakUKLB;
+	private Label textUSLB, textUKLB, speakUSLBA, speakUKLBA, changeLB, GtranslateLB, addLB, deleteLB;
 
 	@FXML
-	private Label textUKLB;
+	private Button recentAfter, searchAfter;
 
 	@FXML
-	private Label speakUSLBA;
-
-	@FXML
-	private Label speakUKLBA;
-
-	@FXML
-	private Label changeLB;
-
-	@FXML
-	private Label GtranslateLB;
-
-	@FXML
-	private Label addLB;
-
-	@FXML
-	private Label deleteLB;
-
-	@FXML
-	private Button recentAfter;
-
-	@FXML
-	private Button searchAfter;
-
-	@FXML
-	private ImageView changeImg = new ImageView();
-	
-	@FXML
-	private ImageView addImg = new ImageView();
-	
-	@FXML
-	private ImageView deleteImg = new ImageView();
-	
-	@FXML
-	private ImageView GtranslateImg = new ImageView();
-	
-	@FXML
-	private ListView<String> recentList;
-
-	@FXML
-	private ListView<String> listWord;
+	private ListView<String> recentList, listWord;
 
 	@FXML
 	private AnchorPane pane;
@@ -115,24 +90,39 @@ public class Controller extends Application implements Initializable {
 
 	private Gtranslate gtranslate = new Gtranslate();
 
-	private static String sourceLang = "en";
-	
-	private static String targetLang = "vi";
-	
+	private static String sourceLang = "en", targetLang = "vi", GsearchWord = "";
+
 	private Add addWindow = new Add();
 	private Change changeWindow = new Change();
 	private Delete deleteWindow = new Delete();
+	private About aboutWindow = new About();
 	ObservableList<String> elementsListWord = FXCollections.observableArrayList();
 
 	ObservableList<String> elementsRecentWord = FXCollections.observableArrayList();
 
 	private ArrayList<String> listRecentWord = new ArrayList<>();
 
+	private double x, y;
+
 	@Override
 	public void start(Stage primaryStage) throws IOException {
 		Parent root = FXMLLoader.load(getClass().getResource("layout.fxml"));
 		primaryStage.setScene(new Scene(root));
+		Image image = new Image(getClass().getResourceAsStream("/icons8_Books_48px.png"));
+		primaryStage.getIcons().add(image);
+		primaryStage.initStyle(StageStyle.TRANSPARENT);
 		primaryStage.show();
+		primaryStage.setOnCloseRequest(e -> {
+			e.consume();
+			Alert alert = new Alert(AlertType.CONFIRMATION);
+			alert.setTitle("Confirmation Dialog");
+			alert.setHeaderText(null);
+			alert.setContentText("Are you sure to exit?");
+			Optional<ButtonType> result = alert.showAndWait();
+			if (result.get() == ButtonType.OK) {
+				primaryStage.close();
+			}
+		});
 	}
 
 	@Override
@@ -148,15 +138,20 @@ public class Controller extends Application implements Initializable {
 		image = new Image(getClass().getResourceAsStream("/icons8_Speaker_32px.png"));
 		speakUSLB.setImage(image);
 		speakUKLB.setImage(image);
+		image = new Image(getClass().getResourceAsStream("/icons8_Minimize_Window_48px.png"));
+		minimizeWindow.setImage(image);
+		image = new Image(getClass().getResourceAsStream("/icons8_Plus_48px.png"));
+		maximizeWindow.setImage(image);
+		image = new Image(getClass().getResourceAsStream("/icons8_Cancel_48px.png"));
+		closeWindow.setImage(image);
 		recentList.setVisible(false);
+		textFlow.setVisible(false);
 		try {
 			DictManage.insertFromFile();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		for (String s : DictManage.showWords())
-		{
+		for (String s : DictManage.showWords()) {
 			elementsListWord.add(s);
 		}
 		listWord.setItems(elementsListWord);
@@ -166,6 +161,17 @@ public class Controller extends Application implements Initializable {
 		vm = VoiceManager.getInstance();
 		v = vm.getVoice("mbrola_us1");
 		v.allocate();
+		text.setFont(Font.font("Helvetica neue", FontWeight.THIN, FontPosture.ITALIC, 21));
+		text.setText("The word not found in Dictionary data. You can search with ");
+		link.setFont(Font.font("Helvetica neue", FontPosture.ITALIC, 21));
+		link.setOnAction(e -> {
+			try {
+				GsearchWord = fieldSearch.getText();
+				gtranslate.start();
+			} catch (IOException e1) {
+				e1.printStackTrace();
+			}
+		});
 	}
 
 	private String formatOutput(String s) {
@@ -194,12 +200,21 @@ public class Controller extends Application implements Initializable {
 	public void onEnter() {
 		String word = listWord.getSelectionModel().getSelectedItem();
 		nameWord.setText(word);
-		textArea.setText(formatOutput(DictManage.get(word)));
-		if (listRecentWord.isEmpty() || !word.equals(listRecentWord.get(listRecentWord.size() - 1))) {
-			listRecentWord.add(word);
-			elementsRecentWord.clear();
-			for (int i = listRecentWord.size() - 1; i >= 0; i--)
-				elementsRecentWord.add(listRecentWord.get(i));
+		if (word == null) {
+			textArea.setVisible(false);
+			textFlow.setVisible(true);
+			textFlow.getChildren().add(text);
+			textFlow.getChildren().add(link);
+		} else {
+			textArea.setVisible(true);
+			textFlow.setVisible(false);
+			textArea.setText(formatOutput(DictManage.get(word)));
+			if (listRecentWord.isEmpty() || !word.equals(listRecentWord.get(listRecentWord.size() - 1))) {
+				listRecentWord.add(word);
+				elementsRecentWord.clear();
+				for (int i = listRecentWord.size() - 1; i >= 0; i--)
+					elementsRecentWord.add(listRecentWord.get(i));
+			}
 		}
 	}
 
@@ -210,6 +225,11 @@ public class Controller extends Application implements Initializable {
 	}
 
 	@FXML
+	public void listOnClick() {
+		onEnter();
+	}
+
+	@FXML
 	public void keyPress(KeyEvent e) {
 		if (e.getCode() == KeyCode.DOWN)
 			listWord.requestFocus();
@@ -217,15 +237,16 @@ public class Controller extends Application implements Initializable {
 		String word = fieldSearch.getText();
 		if (word.length() == 0) {
 			for (String s : DictManage.showWords())
-					elementsListWord.add(s);
+				elementsListWord.add(s);
 		} else
 			for (String s : DictManage.searchWord(word)) {
-					elementsListWord.add(s);
+				elementsListWord.add(s);
 			}
 		listWord.getSelectionModel().select(0);
 	}
 
 	public void openGtranslateWindow() throws IOException {
+		GsearchWord = "";
 		gtranslate.start();
 	}
 
@@ -240,6 +261,10 @@ public class Controller extends Application implements Initializable {
 	public void openDeleteWindow() throws IOException {
 		deleteWindow.start();
 	}
+	
+	public void openAboutWindow() throws IOException {
+		aboutWindow.start();
+	}
 
 	public void setSpeakUSVoice() {
 		speakUSLB.setStyle("-fx-opacity: 0.5");
@@ -249,9 +274,7 @@ public class Controller extends Application implements Initializable {
 		v.allocate();
 	}
 
-	public void setSpeakUKVoice()
-
-	{
+	public void setSpeakUKVoice() {
 		speakUKLB.setStyle("-fx-opacity: 0.5");
 		textUKLB.setStyle("-fx-text-fill : SLATEBLUE");
 		v.deallocate();
@@ -344,16 +367,20 @@ public class Controller extends Application implements Initializable {
 	public static boolean contain(String target) {
 		return DictManage.contains(target);
 	}
-	
+
 	public static String getsourceLang() {
 		return sourceLang;
 	}
-	
+
 	public static String gettargetLang() {
 		return targetLang;
 	}
 
-	public void exportFile() throws FileNotFoundException, UnsupportedEncodingException {
+	public static String getGsearchWord() {
+		return GsearchWord;
+	}
+
+	public void exportFile() throws IOException {
 		Alert alert = new Alert(AlertType.CONFIRMATION);
 		alert.setTitle("Confirmation Dialog");
 		alert.setHeaderText(null);
@@ -361,11 +388,7 @@ public class Controller extends Application implements Initializable {
 		Optional<ButtonType> result = alert.showAndWait();
 		if (result.get() == ButtonType.OK) {
 			pane.setStyle("-fx-cursor: WAIT");
-			PrintWriter writer = new PrintWriter("Output/output.txt", "UTF-8");
-			for (String s : DictManage.showWords()) {
-				writer.println(s + ": " + DictManage.get(s));
-			}
-			writer.close();
+			DictManage.dictionaryExportToFile();
 			pane.setStyle("-fx-cursor: DISAPPEAR");
 			System.out.println("Done");
 		}
@@ -383,13 +406,17 @@ public class Controller extends Application implements Initializable {
 		}
 	}
 
-	public void changeEVtoVE() throws IOException
-	{
-		if (sourceLang.equals("en"))
-		{
+	public void minimizeWindow() {
+		Stage stage = (Stage) listWord.getScene().getWindow();
+		stage.setIconified(true);
+	}
+
+	public void changeEVtoVE() throws IOException {
+		if (sourceLang.equals("en")) {
 			pane.setStyle("-fx-cursor: WAIT");
 			nameWord.setText("");
 			textArea.setText("");
+			textFlow.getChildren().clear();
 			DictManage.insertFromFileVA();
 			speakUKLBA.setVisible(false);
 			speakUSLBA.setVisible(false);
@@ -397,7 +424,7 @@ public class Controller extends Application implements Initializable {
 			textUKLB.setVisible(false);
 			elementsListWord.clear();
 			for (String s : DictManage.showWords())
-					elementsListWord.add(s);
+				elementsListWord.add(s);
 			pane.setStyle("-fx-cursor: DISAPPEAR");
 			speakUKbtn.setVisible(false);
 			speakUSbtn.setVisible(false);
@@ -405,28 +432,60 @@ public class Controller extends Application implements Initializable {
 			targetLang = "en";
 		}
 	}
-	
-	public void changeVEtoEV() throws IOException
-	{
-		if (sourceLang.equals("vi"))
-		{
+
+	public void changeVEtoEV() throws IOException {
+		if (sourceLang.equals("vi")) {
 			pane.setStyle("-fx-cursor: WAIT");
 			nameWord.setText("");
 			textArea.setText("");
+			textFlow.getChildren().clear();
 			DictManage.insertFromFile();
 			speakUKLBA.setVisible(true);
 			speakUSLBA.setVisible(true);
 			textUSLB.setVisible(true);
 			textUKLB.setVisible(true);
 			elementsListWord.clear();
-				for (String s : DictManage.showWords())
-						elementsListWord.add(s);
-			
+			for (String s : DictManage.showWords())
+				elementsListWord.add(s);
 			pane.setStyle("-fx-cursor: DISAPPEAR");
 			speakUKbtn.setVisible(true);
 			speakUSbtn.setVisible(true);
 			sourceLang = "en";
 			targetLang = "vi";
 		}
+	}
+
+	public void saveDataDictionary() throws FileNotFoundException, UnsupportedEncodingException, URISyntaxException {
+		Alert alert = new Alert(AlertType.CONFIRMATION);
+		alert.setTitle("Confirmation Dialog");
+		alert.setHeaderText(null);
+		alert.setContentText("Are you sure to Save File?");
+		Optional<ButtonType> result = alert.showAndWait();
+		if (result.get() == ButtonType.OK) {
+			pane.setStyle("-fx-cursor: WAIT");
+			File file;
+			if (targetLang.equals("vi"))
+				file = new File("resources/dictionaries.txt");
+			else
+				file = new File("resources/VA.txt");
+			OutputStream output = new FileOutputStream(file);
+			PrintWriter writer = new PrintWriter(output);
+			for (String s : DictManage.showWords())
+				writer.println(s + "##" + DictManage.get(s));
+			writer.close();
+			pane.setStyle("-fx-cursor: DISAPPEAR");
+			System.out.println("Done");
+		}
+	}
+
+	public void dragged(MouseEvent event) {
+		Stage stage = (Stage) listWord.getScene().getWindow();
+		stage.setX(event.getScreenX() - x);
+		stage.setY(event.getScreenY() - y);
+	}
+
+	public void pressed(MouseEvent e) {
+		x = e.getSceneX();
+		y = e.getSceneY();
 	}
 }

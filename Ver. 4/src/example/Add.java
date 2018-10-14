@@ -9,6 +9,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.image.Image;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.TextArea;
@@ -66,6 +67,10 @@ public class Add {
 		primaryStage.initModality(Modality.APPLICATION_MODAL);
 		Parent root = FXMLLoader.load(getClass().getResource("addLayout.fxml"));
 		primaryStage.setScene(new Scene(root));
+		Image image = new Image(getClass().getResourceAsStream("/icons8_About_48px.png"));
+		primaryStage.getIcons().add(image);
+		primaryStage.setTitle("Add Word");
+		primaryStage.setResizable(false);
 		primaryStage.showAndWait();
 	}
 	
