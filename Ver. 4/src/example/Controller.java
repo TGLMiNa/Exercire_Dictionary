@@ -174,14 +174,6 @@ public class Controller extends Application implements Initializable {
 		});
 	}
 
-	private String formatOutput(String s) {
-		String[] arr = s.split("@");
-		String result = new String();
-		for (String x : arr) {
-			result += x + "\n";
-		}
-		return result;
-	}
 
 	public void changeToRecent() {
 		recentList.setVisible(true);
@@ -208,7 +200,7 @@ public class Controller extends Application implements Initializable {
 		} else {
 			textArea.setVisible(true);
 			textFlow.setVisible(false);
-			textArea.setText(formatOutput(DictManage.get(word)));
+			textArea.setText(DictionaryManagement.formatOutput(DictManage.get(word)));
 			if (listRecentWord.isEmpty() || !word.equals(listRecentWord.get(listRecentWord.size() - 1))) {
 				listRecentWord.add(word);
 				elementsRecentWord.clear();
@@ -470,6 +462,7 @@ public class Controller extends Application implements Initializable {
 				file = new File("resources/VA.txt");
 			OutputStream output = new FileOutputStream(file);
 			PrintWriter writer = new PrintWriter(output);
+			writer.println("");
 			for (String s : DictManage.showWords())
 				writer.println(s + "##" + DictManage.get(s));
 			writer.close();

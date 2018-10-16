@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.input.*?>
 <?import javafx.scene.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.effect.*?>
@@ -202,8 +203,14 @@
 					<menus>
 						<Menu mnemonicParsing="false" text="File">
 							<items>
-								<MenuItem mnemonicParsing="false" onAction="#saveDataDictionary" text="Save" />
-								<MenuItem mnemonicParsing="false" onAction="#exportFile" text="Export File (Output/output.txt)" />
+								<MenuItem mnemonicParsing="false" onAction="#saveDataDictionary" text="Save">
+                           <accelerator>
+                              <KeyCodeCombination alt="UP" code="S" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
+                           </accelerator></MenuItem>
+								<MenuItem mnemonicParsing="false" onAction="#exportFile" text="Export File (Output/output.txt)">
+                           <accelerator>
+                              <KeyCodeCombination alt="UP" code="E" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
+                           </accelerator></MenuItem>
 								<SeparatorMenuItem mnemonicParsing="false" />
 								<MenuItem mnemonicParsing="false" onAction="#exitWindow" text="Exit" />
 							</items>
@@ -216,8 +223,14 @@
 											<toggleGroup>
 												<ToggleGroup fx:id="language" />
 											</toggleGroup>
+                                 <accelerator>
+                                    <KeyCodeCombination alt="UP" code="DIGIT1" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
+                                 </accelerator>
 										</RadioMenuItem>
-										<RadioMenuItem mnemonicParsing="false" onAction="#changeEVtoVE" text="Vietnamese - English" toggleGroup="$language" />
+										<RadioMenuItem mnemonicParsing="false" onAction="#changeEVtoVE" text="Vietnamese - English" toggleGroup="$language">
+                                 <accelerator>
+                                    <KeyCodeCombination alt="UP" code="DIGIT2" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
+                                 </accelerator></RadioMenuItem>
 									</items>
 								</Menu>
 							</items>
@@ -234,7 +247,9 @@
 				</MenuBar>
 			</children>
 		</AnchorPane>
-		<AnchorPane layoutY="-1.0" prefHeight="37.0" prefWidth="1050.0" style="-fx-background-color: LAVENDER;" />
+		<AnchorPane layoutY="-1.0" prefHeight="37.0" prefWidth="1050.0" style="-fx-background-color: LAVENDER;">
+         <children>
+         </children></AnchorPane>
 		<HBox alignment="BOTTOM_RIGHT" layoutX="935.0" layoutY="-1.0" prefHeight="39.0" prefWidth="115.0">
 			<children>
 				<ImageView fx:id="minimizeWindow" fitHeight="39.0" fitWidth="39.0" onMouseClicked="#minimizeWindow">

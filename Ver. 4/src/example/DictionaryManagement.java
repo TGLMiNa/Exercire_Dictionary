@@ -96,8 +96,17 @@ public class DictionaryManagement {
 	public void dictionaryExportToFile() throws IOException {
 		PrintWriter writer = new PrintWriter("Output/output.txt", "UTF-8");
 		for (String s : trie.keys()) {
-			writer.println(s + ": " + trie.get(s));
+			writer.println(s + ":\n " + formatOutput(trie.get(s)));
 		}
 		writer.close();
+	}
+	
+	public static String formatOutput(String s) {
+		String[] arr = s.split("@");
+		String result = new String();
+		for (String x : arr) {
+			result += x + "\n";
+		}
+		return result;
 	}
 }

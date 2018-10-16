@@ -42,7 +42,9 @@ public class Gtranslate implements Initializable {
 	}
 
 	public void translateWithGoogle() throws IOException {
-		textExplain.setText(search(format(textTarget.getText()), Controller.getsourceLang(), Controller.gettargetLang()).replace("~", "."));
+		byte[] ptext = textTarget.getText().getBytes("UTF-8");
+		String s = new String(ptext);
+		textExplain.setText(search(format(s), Controller.getsourceLang(), Controller.gettargetLang()).replace("~", "."));
 	}
 
 	public String search(String sourceText, String sourceLang, String targetLang) throws IOException {
@@ -82,8 +84,9 @@ public class Gtranslate implements Initializable {
 
 	public void speakText() throws JavaLayerException, IOException {
 		try {
-			String word = textTarget.getText();
-			URL url = new URL("https://translate.google.com.vn/translate_tts?ie=UTF-8&q=" + format(word) + "&tl="
+			byte[] ptext = textTarget.getText().getBytes("UTF-8");
+			String s = new String(ptext);
+			URL url = new URL("https://translate.google.com.vn/translate_tts?ie=UTF-8&q=" + format(s) + "&tl="
 					+ Controller.getsourceLang() + "&client=tw-ob");
 			HttpsURLConnection con = (HttpsURLConnection) url.openConnection();
 			con.setRequestMethod("GET");
