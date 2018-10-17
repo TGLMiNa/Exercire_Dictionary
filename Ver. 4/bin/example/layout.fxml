@@ -245,6 +245,7 @@
 						<DropShadow height="0.0" radius="0.0" width="0.0" />
 					</effect>
 				</MenuBar>
+            <ImageView fx:id="logo" fitHeight="120.0" fitWidth="380.0" layoutX="656.0" layoutY="80.0" pickOnBounds="true" preserveRatio="true" />
 			</children>
 		</AnchorPane>
 		<AnchorPane layoutY="-1.0" prefHeight="37.0" prefWidth="1050.0" style="-fx-background-color: LAVENDER;">

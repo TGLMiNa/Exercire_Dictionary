@@ -81,12 +81,16 @@ public class Gtranslate implements Initializable {
 		s = s.replace(".", "~");
 		return s;
 	}
+	public String formatForVoice(String s) {
+		s = s.replaceAll(" ", "+");
+		return s;
+	}
 
 	public void speakText() throws JavaLayerException, IOException {
 		try {
 			byte[] ptext = textTarget.getText().getBytes("UTF-8");
 			String s = new String(ptext);
-			URL url = new URL("https://translate.google.com.vn/translate_tts?ie=UTF-8&q=" + format(s) + "&tl="
+			URL url = new URL("https://translate.google.com.vn/translate_tts?ie=UTF-8&q=" + formatForVoice(s) + "&tl="
 					+ Controller.getsourceLang() + "&client=tw-ob");
 			HttpsURLConnection con = (HttpsURLConnection) url.openConnection();
 			con.setRequestMethod("GET");
@@ -109,7 +113,7 @@ public class Gtranslate implements Initializable {
 			textTarget.setText(Controller.getGsearchWord());
 			try {
 				textExplain.setText(
-						search(format(textTarget.getText()), Controller.getsourceLang(), Controller.gettargetLang()));
+						search(format(textTarget.getText()), Controller.getsourceLang(), Controller.gettargetLang()).replace("~", "."));
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
